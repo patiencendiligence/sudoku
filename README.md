@@ -23,7 +23,7 @@
 ### 개발 모드
 
 ```bash
-cd sudoku-extension
+cd sudoku
 npm install
 npm run dev
 ```
