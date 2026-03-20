@@ -18,37 +18,6 @@
   - 👑 레벨 10: 왕관 (최고 레벨!)
 - 로컬스토리지에 진행상황 자동 저장
 
-## 설치 방법
-
-### 개발 모드
-
-```bash
-cd sudoku
-npm install
-npm run dev
-```
-
-브라우저에서 http://localhost:5173 접속
-
-### 확장프로그램 설치
-
-1. 빌드하기
-```bash
-npm run build
-```
-
-2. Chrome에서 `chrome://extensions` 접속
-3. "개발자 모드" 활성화
-4. "압축해제된 확장 프로그램을 로드합니다" 클릭
-5. `dist` 폴더 선택
-
-## 아이콘 추가
-
-`public/icons/` 폴더에 다음 파일들을 추가하세요:
-- icon16.png (16x16)
-- icon48.png (48x48)
-- icon128.png (128x128)
-
 ## 플레이 방법
 
 1. 확장프로그램 아이콘 클릭
