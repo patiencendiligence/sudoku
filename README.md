@@ -1,3 +1,5 @@
+# Quick Notes (Sudoku Game)
+
 This is a browser extension for a Sudoku game that you can enjoy secretly.
 
 The extension is disguised as "Quick Notes".
@@ -5,7 +7,6 @@ The extension is disguised as "Quick Notes".
 * Features
 - Level 1–10 Difficulty System (Gets harder as levels increase)
 - Automatic User Nickname Generation (Korean/English depending on region)
-- Korean Environment: "Red Cat", "Blue Rabbit", etc.
 - English Environment: "RedCat", "BlueFox", etc.
 - Rank Emoticons by Level
 
@@ -36,7 +37,6 @@ The extension is disguised as "Quick Notes".
 - 레벨 1~10 난이도 시스템 (레벨이 올라갈수록 어려워짐)
 - 사용자 닉네임 자동 생성 (지역에 따라 한글/영문)
   - 한국어 환경: "빨간고양이", "파란토끼" 등
-  - 영어 환경: "RedCat", "BlueFox" 등
 - 레벨별 계급 이모티콘
   - 🐹 레벨 1: 햄스터
   - 🐕 레벨 3: 강아지
