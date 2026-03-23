@@ -2,6 +2,7 @@ import React from 'react';
 import { getDisplayName, getRankEmoji } from '../utils/nickname';
 import { themes } from '../hooks/useTheme';
 import { formatTime, formatBestTime } from '../hooks/useTimer';
+import { Translations } from '../hooks/useLanguage';
 
 interface HeaderProps {
   nickname: string;
@@ -14,6 +15,7 @@ interface HeaderProps {
   isTimerRunning: boolean;
   onTimerToggle: () => void;
   hasActiveGame: boolean;
+  t: Translations;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -27,6 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
   isTimerRunning,
   onTimerToggle,
   hasActiveGame,
+  t,
 }) => {
   const displayName = getDisplayName(nickname, level);
   
@@ -54,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({
           }}
         >
           <span>🏆</span>
-          <span>최고기록: {formatBestTime(bestTime)}</span>
+          <span>{t.bestRecord}: {formatBestTime(bestTime)}</span>
         </div>
       )}
       
@@ -110,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({
                 fontSize: `${s(10)}px`,
                 padding: 0,
               }}
-              title={isTimerRunning ? '일시정지' : '재개'}
+              title={isTimerRunning ? t.pause : t.resume}
             >
               {isTimerRunning ? '⏸' : '▶'}
             </button>
@@ -124,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({
           color: colors.textSecondary,
         }}
       >
-        레벨 {level} / 10 • 완료 {gamesCompleted}게임
+        {t.level} {level} / 10 • {t.completed} {gamesCompleted} {t.games}
       </div>
       <div
         style={{
@@ -142,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({
               opacity: level >= l ? 1 : 0.3,
               filter: level >= l ? 'none' : 'grayscale(100%)',
             }}
-            title={`레벨 ${l}`}
+            title={t.levelTooltip(l)}
           >
             {getRankEmoji(l)}
           </span>

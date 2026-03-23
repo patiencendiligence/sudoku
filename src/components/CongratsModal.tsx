@@ -2,6 +2,7 @@ import React from 'react';
 import { getRankEmoji } from '../utils/nickname';
 import { themes } from '../hooks/useTheme';
 import { formatBestTime } from '../hooks/useTimer';
+import { Translations } from '../hooks/useLanguage';
 
 interface CongratsModalProps {
   level: number;
@@ -13,6 +14,7 @@ interface CongratsModalProps {
   isNewRecord: boolean;
   completionTime: number;
   levelCompletions: number;
+  t: Translations;
 }
 
 export const CongratsModal: React.FC<CongratsModalProps> = ({
@@ -25,6 +27,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
   isNewRecord,
   completionTime,
   levelCompletions,
+  t,
 }) => {
   const isMaxLevel = level >= 10;
   const nextLevelEmoji = !isMaxLevel ? getRankEmoji(level + 1) : null;
@@ -79,16 +82,16 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
               display: 'inline-block',
             }}
           >
-            🎊 새로운 최고기록! 🎊
+            {t.newRecord}
           </div>
         )}
         
         <h2 style={{ margin: `0 0 ${s(8)}px`, color: colors.text, fontSize: `${s(20)}px` }}>
-          축하합니다!
+          {t.congratulations}
         </h2>
         
         <p style={{ margin: `0 0 ${s(8)}px`, color: colors.textSecondary, fontSize: `${s(14)}px` }}>
-          레벨 {level} 클리어!
+          {t.levelClear(level)}
         </p>
         
         <p style={{ margin: `0 0 ${s(16)}px`, color: colors.primary, fontSize: `${s(16)}px`, fontWeight: 'bold' }}>
@@ -106,7 +109,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
               color: colors.text,
             }}
           >
-            다음 레벨에서 새 계급 획득! {nextLevelEmoji}
+            {t.nextRankUnlock} {nextLevelEmoji}
           </div>
         )}
 
@@ -121,7 +124,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
           >
             <div style={{ fontSize: `${s(24)}px` }}>👑</div>
             <div style={{ fontSize: `${s(14)}px`, color: colors.text, fontWeight: 'bold' }}>
-              최고 레벨 달성!
+              {t.maxLevelReached}
             </div>
           </div>
         ) : null}
@@ -134,7 +137,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
               marginBottom: `${s(12)}px`,
             }}
           >
-            🔒 레벨업까지 {gamesNeeded}게임 더 클리어하세요
+            {t.levelUpLocked(gamesNeeded)}
           </div>
         )}
 
@@ -153,7 +156,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
                 cursor: 'pointer',
               }}
             >
-              레벨 업! ↑
+              {t.levelUp}
             </button>
           )}
           <button
@@ -168,7 +171,7 @@ export const CongratsModal: React.FC<CongratsModalProps> = ({
               cursor: 'pointer',
             }}
           >
-            {isMaxLevel ? '다시 플레이' : '계속하기'}
+            {isMaxLevel ? t.playAgain : t.continue}
           </button>
         </div>
       </div>
