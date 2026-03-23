@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { useGame } from './hooks/useGame';
 import { useTheme, themes } from './hooks/useTheme';
 import { useScale } from './hooks/useScale';
+import { useLanguage } from './hooks/useLanguage';
 import { Header } from './components/Header';
 import { Board } from './components/Cell';
 import { NumberPad } from './components/NumberPad';
 import { CongratsModal } from './components/CongratsModal';
 import { ThemeToggle } from './components/ThemeToggle';
+import { LanguageToggle } from './components/LanguageToggle';
 
 const App: React.FC = () => {
   const {
@@ -29,6 +31,7 @@ const App: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const colors = themes[theme];
   const { s } = useScale();
+  const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     document.body.style.backgroundColor = colors.background;
@@ -66,8 +69,8 @@ const App: React.FC = () => {
       style={{
         position: 'relative',
         width: '100%',
-        maxWidth: '380px',
-        minHeight: '100vh',
+        minWidth: '325px',
+        minHeight: '508px',
         margin: '0 auto',
         padding: `${s(16)}px`,
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -87,7 +90,7 @@ const App: React.FC = () => {
       >
         <button
           onClick={() => {
-            if (window.confirm('닉네임과 레벨이 초기화됩니다.\n최고기록은 유지됩니다.\n\n초기화하시겠습니까?')) {
+            if (window.confirm(t.resetConfirm)) {
               resetAll();
             }
           }}
@@ -105,10 +108,11 @@ const App: React.FC = () => {
             transition: 'all 0.3s',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
           }}
-          title="닉네임/레벨 초기화"
+          title={t.resetTooltip}
         >
           🔄
         </button>
+        <LanguageToggle language={language} onToggle={toggleLanguage} s={s} theme={theme} />
         <ThemeToggle theme={theme} onToggle={toggleTheme} s={s} />
       </div>
       
@@ -123,6 +127,7 @@ const App: React.FC = () => {
         isTimerRunning={timer.isRunning}
         onTimerToggle={timer.toggle}
         hasActiveGame={!!hasGame && !isComplete}
+        t={t}
       />
 
       {hasGame ? (
@@ -166,7 +171,7 @@ const App: React.FC = () => {
                 transition: 'all 0.2s',
               }}
             >
-              초기화
+              {t.reset}
             </button>
             <button
               onClick={startNewGame}
@@ -181,7 +186,7 @@ const App: React.FC = () => {
                 transition: 'all 0.2s',
               }}
             >
-              새 게임
+              {t.newGame}
             </button>
           </div>
         </>
@@ -198,11 +203,11 @@ const App: React.FC = () => {
         >
           <div style={{ fontSize: `${s(48)}px` }}>🧩</div>
           <p style={{ color: colors.textSecondary, margin: 0, fontSize: `${s(14)}px` }}>
-            레벨 {gameData.level} 스도쿠에 도전하세요!
+            {t.challengeLevel(gameData.level)}
           </p>
           {bestTime && (
             <p style={{ color: colors.textSecondary, margin: 0, fontSize: `${s(12)}px` }}>
-              🏆 최고기록: {Math.floor(bestTime / 1000)}초
+              🏆 {t.bestRecord}: {Math.floor(bestTime / 1000)}{t.seconds}
             </p>
           )}
           <button
@@ -225,7 +230,7 @@ const App: React.FC = () => {
               e.currentTarget.style.backgroundColor = colors.primary;
             }}
           >
-            게임 시작
+            {t.startGame}
           </button>
         </div>
       )}
@@ -241,6 +246,7 @@ const App: React.FC = () => {
           isNewRecord={isNewRecord}
           completionTime={completionTime}
           levelCompletions={gameData.levelCompletions[gameData.level] || 0}
+          t={t}
         />
       )}
     </div>
