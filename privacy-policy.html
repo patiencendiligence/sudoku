@@ -41,7 +41,7 @@
   </ul>
 
   <h2>Local Storage</h2>
-  <p>The extension uses Chrome's local storage API (chrome.storage.local) to save your data on your device only:</p>
+  <p>The extension uses the Web Storage API (localStorage) in the extension popup to save your data on your device only:</p>
   <ul>
     <li>Game progress and settings</li>
     <li>User preferences (theme, nickname)</li>
@@ -49,11 +49,7 @@
   <p>This data is stored locally on your browser and is never transmitted to any external server. You can clear this data at any time by removing the extension.</p>
 
   <h2>Permissions</h2>
-  <p>The extension requires the following permission:</p>
-  <ul>
-    <li><strong>storage:</strong> To save your progress and preferences locally on your device</li>
-  </ul>
-  <p>This permission is used solely for the extension's core functionality and not for data collection.</p>
+  <p>The extension does not request host permissions or the Chrome <code>storage</code> permission. Progress and preferences are stored with <code>localStorage</code> inside the extension, which does not require extra manifest permissions.</p>
 
   <h2>Third-Party Services</h2>
   <p>This extension does not integrate with any third-party services or APIs. All functionality is self-contained within the extension.</p>

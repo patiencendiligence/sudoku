@@ -1,6 +1,6 @@
 {
   "name": "sudoku-extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A stealthy Sudoku game browser extension",
   "type": "module",
   "scripts": {
